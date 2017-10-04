@@ -54,14 +54,11 @@ void loop() {
 	String oid_dewp = oid.format("sensor.%s.%s.dewp %f %d", "temp", "dht22", dp, tstamp);
 	String oid_heati = oid.format("sensor.%s.%s.heati %f %d", "temp", "dht22", hi, tstamp);
 
-	// Only send data if within acceptable range.
-	if (t > 0 && t < 100){
-		Serial.println( oid_humidity );
-		Serial.println( oid_tempc );
-		Serial.println( oid_tempf );
-		Serial.println( oid_dewp );
-		Serial.println( oid_heati );
-	}
+	Serial.println( oid_humidity );
+	Serial.println( oid_tempc );
+	Serial.println( oid_tempf );
+	Serial.println( oid_dewp );
+	Serial.println( oid_heati );
 	
     int tmp36read = analogRead(TMP36PIN); 
     tstamp = Time.now();
@@ -91,12 +88,14 @@ void loop() {
     client.connect( GRAPHITE_HOSTNAME, GRAPHITE_PORT );
 	if( client.connected() ){
 	    Serial.println( "Writing over network" );
-	    client.println(oid_humidity);
-	    client.println(oid_tempc);
-	    client.println(oid_tempf);
-	    client.println(oid_dewp);
-	    client.println(oid_heati);
-	    
+	   	// Only send data if within acceptable range.
+	   	if (t > 0 && t < 100){
+	    	client.println(oid_humidity);
+	    	client.println(oid_tempc);
+	    	client.println(oid_tempf);
+	    	client.println(oid_dewp);
+	    	client.println(oid_heati);
+	    }
 	    client.println(oid_tmp36_tempc);
 	    client.println(oid_tmp36_tempf);
 	    
