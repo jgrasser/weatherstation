@@ -1,27 +1,20 @@
 // This #include statement was automatically added by the Particle IDE.
 #include "Adafruit_DHT/Adafruit_DHT.h"
 
-#define TEMT6000PIN A2              
-
-#define TMP36PIN A1              
-
-#define DHTPIN D6     // what pin we're connected to
+#define TEMT6000PIN A2
+#define TMP36PIN A1
+#define DHTPIN D6
 
 // Uncomment whatever type you're using!
 //#define DHTTYPE DHT11		// DHT 11 
 #define DHTTYPE DHT22		// DHT 22 (AM2302)
 //#define DHTTYPE DHT21		// DHT 21 (AM2301)
 
-// Connect pin 1 (on the left) of the sensor to +5V
-// Connect pin 2 of the sensor to whatever your DHTPIN is
-// Connect pin 4 (on the right) of the sensor to GROUND
-// Connect a 10K resistor from pin 2 (data) to pin 1 (power) of the sensor
-
 DHT dht(DHTPIN, DHTTYPE);
 
 #define GRAPHITE_HOSTNAME "myserver"
 #define GRAPHITE_PORT 2003
-//IPADDR of Graphite host is 192.168.0.70
+
 TCPClient client;
 
 void setup() {
@@ -35,23 +28,23 @@ void loop() {
     String oid = "";
     int tstamp = Time.now();
 
-// Reading temperature or humidity takes about 250 milliseconds!
-// Sensor readings may also be up to 2 seconds 'old' (its a 
-// very slow sensor)
+	// Reading temperature or humidity takes about 250 milliseconds!
+	// Sensor readings may also be up to 2 seconds 'old' (its a 
+	// very slow sensor)
 	float h = dht.getHumidity();
-// Read temperature as Celsius
+	// Read temperature as Celsius
 	float t = dht.getTempCelcius();
-// Read temperature as Farenheit
+	// Read temperature as Farenheit
 	float f = dht.getTempFarenheit();
   
-// Check if any reads failed and exit early (to try again).
+	// Check if any reads failed and exit early (to try again).
 	if (isnan(h) || isnan(t) || isnan(f)) {
 		Serial.println("Failed to read from DHT sensor!");
 		return;
 	}
 
-// Compute heat index
-// Must send in temp in Fahrenheit!
+	// Compute heat index
+	// Must send in temp in Fahrenheit!
 	float hi = dht.getHeatIndex();
 	float dp = dht.getDewPoint();
 	float k = dht.getTempKelvin();
@@ -61,7 +54,7 @@ void loop() {
 	String oid_dewp = oid.format("sensor.%s.%s.dewp %f %d", "temp", "dht22", dp, tstamp);
 	String oid_heati = oid.format("sensor.%s.%s.heati %f %d", "temp", "dht22", hi, tstamp);
 
-// Only send data if within acceptable range.
+	// Only send data if within acceptable range.
 	if (t > 0 && t < 100){
 		Serial.println( oid_humidity );
 		Serial.println( oid_tempc );
