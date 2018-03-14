@@ -1,6 +1,8 @@
 # weatherstation
 
-A Particle project named weatherstation
+A very simple climate monitoring apparatus. Supports measuring temperature from two different temperature sensors(DHT11, and TMP36) and measuring ambient light levels with TEMP6000. 
+
+![Breadboard](https://github.com/jgrasser/weatherstation/blob/master/WeatherStation_bb.png)
 
 ## Welcome to your project!
 
@@ -28,7 +30,7 @@ If your project includes a library that has not been registered in the Particle 
 
 ## Compiling your project
 
-When you're ready to compile your project, make sure you have the correct Particle device target selected and run `particle compile <platform>` in the CLI or click the Compile button in the Desktop IDE. The following files in your project folder will be sent to the compile service:
+When you're ready to compile your project, make sure you have the correct Particle device target selected and run `particle compile photon` in the CLI or click the Compile button in the Desktop IDE. The following files in your project folder will be sent to the compile service:
 
 - Everything in the `/src` folder, including your `.ino` application file
 - The `project.properties` file for your project
