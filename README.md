@@ -4,6 +4,16 @@ A very simple climate monitoring apparatus. Supports measuring temperature from 
 
 ![Breadboard](https://github.com/jgrasser/weatherstation/blob/master/WeatherStation_bb.png)
 
+## Part List
+
+| Label | Part Type | Store |
+| :---: | :---: | --- |
+| DHT11 | Temperature Sensor | https://www.adafruit.com/product/386 |
+| TMP36 | Temperature Sensor | https://www.sparkfun.com/products/10988 |
+| TEMT6000 | Ambient Light Sensor | https://www.sparkfun.com/products/8688 |
+| Photon | Microcontroller | https://www.adafruit.com/product/2721 |
+| Bread | Breadboard | https://www.sparkfun.com/products/12615 |
+
 ## Welcome to your project!
 
 Every new Particle project is composed of 3 important elements that you'll see have been created in your project directory for weatherstation.
