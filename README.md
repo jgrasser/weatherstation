@@ -2,7 +2,7 @@
 
 A very simple climate monitoring apparatus. Supports measuring temperature from two different temperature sensors(DHT11, and TMP36) and measuring ambient light levels with TEMP6000. 
 
-![Breadboard](https://github.com/jgrasser/weatherstation/blob/master/WeatherStation_bb.png)
+![Breadboard](https://github.com/jgrasser/weatherstation/blob/master/docs/WeatherStation_bb.png)
 
 ## Part List
 
