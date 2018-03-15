@@ -10,9 +10,13 @@
 DHT dht(DHTPIN, DHTTYPE);
 TCPClient client;
 
+void turn_off_photon_leds(){
+        RGB.control(true);
+        RGB.color(0, 0, 0);
+}
+
 void setup() {
-	RGB.control(true); 
-	RGB.color(0, 0, 0);
+	turn_off_photon_leds();
 	dht.begin();
 }
 
