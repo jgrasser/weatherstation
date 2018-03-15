@@ -1,20 +1,13 @@
-// This #include statement was automatically added by the Particle IDE.
 #include "Adafruit_DHT/Adafruit_DHT.h"
 
-#define TEMT6000PIN A2
-#define TMP36PIN A1
 #define DHTPIN D6
-
-// Uncomment whatever type you're using!
-//#define DHTTYPE DHT11		// DHT 11 
-#define DHTTYPE DHT22		// DHT 22 (AM2302)
-//#define DHTTYPE DHT21		// DHT 21 (AM2301)
-
-DHT dht(DHTPIN, DHTTYPE);
-
+#define DHTTYPE DHT22
 #define GRAPHITE_HOSTNAME "myserver"
 #define GRAPHITE_PORT 2003
+#define TEMT6000PIN A2
+#define TMP36PIN A1
 
+DHT dht(DHTPIN, DHTTYPE);
 TCPClient client;
 
 void setup() {
