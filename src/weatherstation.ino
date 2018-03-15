@@ -25,14 +25,12 @@ void loop() {
 	String oid = "";
 	int tstamp = Time.now();
 
-	// Reading temperature or humidity takes about 250 milliseconds!
-	// Sensor readings may also be up to 2 seconds 'old' (its a 
-	// very slow sensor)
 	float h = dht.getHumidity();
-	// Read temperature as Celsius
 	float t = dht.getTempCelcius();
-	// Read temperature as Farenheit
 	float f = dht.getTempFarenheit();
+	float hi = dht.getHeatIndex();
+	float dp = dht.getDewPoint();
+	float k = dht.getTempKelvin();
 
 	// Check if any reads failed and exit early (to try again).
 	if (isnan(h) || isnan(t) || isnan(f)) {
@@ -40,11 +38,6 @@ void loop() {
 		return;
 	}
 
-	// Compute heat index
-	// Must send in temp in Fahrenheit!
-	float hi = dht.getHeatIndex();
-	float dp = dht.getDewPoint();
-	float k = dht.getTempKelvin();
 	String oid_humidity = oid.format("sensor.%s.%s.humidity %f %d", "temp", "dht22", h, tstamp);
 	String oid_tempc = oid.format("sensor.%s.%s.tempc %f %d", "temp", "dht22", t, tstamp);
 	String oid_tempf = oid.format("sensor.%s.%s.tempf %f %d", "temp", "dht22", f, tstamp);
@@ -57,17 +50,11 @@ void loop() {
 	Serial.println( oid_dewp );
 	Serial.println( oid_heati );
 	
-	int tmp36read = analogRead(TMP36PIN); 
 	tstamp = Time.now();
-	// Read will be a value between 0 and 4096. This
-	// represents that fraction of the input voltage. 
-	// 0.8 mV per unit to be exact. 
-    
+
+	int tmp36read = analogRead(TMP36PIN);
 	float voltage = tmp36read;
-	// voltage should be in mV units. 
-	// Centigrade temperature = [(analog voltage in mV) - 500] / 10
 	float temperature_in_celcius = (voltage - 500) / 20;
-	//T(°F) = T(°C) × 1.8 + 32
 	float temperature_in_fahrenheit = temperature_in_celcius * 1.8 + 32;
    
 	String oid_tmp36_tempc = oid.format("sensor.%s.%s.tempc %f %d", "temp", "tmp36", temperature_in_celcius, tstamp);
@@ -76,10 +63,11 @@ void loop() {
 	Serial.println( oid_tmp36_tempc );
 	Serial.println( oid_tmp36_tempf );
 
-	//read data from light sensor
-	int temt6000read = analogRead(TEMT6000PIN); 
 	tstamp = Time.now();
+	int temt6000read = analogRead(TEMT6000PIN);
+
 	String oid_temt6000_read = oid.format("sensor.%s.%s.lightlevel %d %d", "lightlevel", "tmt6000", temt6000read, tstamp);
+
 	Serial.println( oid_temt6000_read );
 
 	client.connect( GRAPHITE_HOSTNAME, GRAPHITE_PORT );
